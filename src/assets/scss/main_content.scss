@@ -1,0 +1,51 @@
+.main-content {
+    position: relative;
+    height: 100%;
+    min-height: 90vh;
+    background-color: $gray-100;
+
+    // Navbar
+    .navbar-top {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    // Container
+    .container-fluid {
+        padding-left : $main-content-padding-x;
+        padding-right: $main-content-padding-x;
+      
+    }
+}
+
+.video_overlays {
+    position: absolute;
+    background-color:rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    z-index: 2;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 60px;
+}
+
+.video_box {
+    position: relative;
+    padding: 20px;
+    video {
+        width: 100%;
+        display: block;
+    }
+}
+
+.scene-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    background-color: transparent;
+    //background-color: #f0f0f0;
+    z-index: 1;
+}
+
+

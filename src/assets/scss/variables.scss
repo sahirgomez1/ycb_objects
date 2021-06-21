@@ -1,0 +1,77 @@
+// Color system
+
+$white:    #fff !default;
+$gray-100: #f6f9fc !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #8898aa !default;   
+$gray-700: #525f7f !default;   
+$gray-800: #32325d !default;   
+$gray-900: #212529 !default;
+$black:    #000 !default;
+
+$grays: () !default;
+$grays: map-merge((
+  "100": $gray-100,
+  "200": $gray-200,
+  "300": $gray-300,
+  "400": $gray-400,
+  "500": $gray-500,
+  "600": $gray-600,
+  "700": $gray-700,
+  "800": $gray-800,
+  "900": $gray-900
+), $grays);
+
+$blue:    #3a6a88 !default;
+$indigo:  #2D303D !default;
+$purple:  #8965e0 !default;
+$pink:    #f3a4b5 !default;
+$red:     #f5365c !default;
+$orange:  #ea9b82 !default;
+$yellow:  #efcb87 !default;
+$green:   #2dce89 !default;
+$teal:    #80cbd7 !default;
+$cyan:    #87bfa1 !default;
+$blue2:   #5CA5B2 !default;
+
+$default:       #172b4d !default;
+$primary:       #2D303D !default;
+$secondary:     #f7fafc !default;
+$success:       $green !default;
+$info:          $teal !default;
+$warning:       $yellow !default;
+$danger:        $red !default;
+$light:         $gray-500 !default;
+$dark:          #282c34 !default;
+$darker:        darken($gray-900, 15%) !default;
+
+// Content
+
+$main-content-padding-y: 100px !default;
+$main-content-padding-x: 15px !default;
+
+// Fonts
+
+$font-family-sans-serif: 'Verdana', sans-serif !default;
+$font-family-base: $font-family-sans-serif !default;
+
+$font-size-base:              1rem !default; // Assumes the browser default, typically `16px`
+$font-size-xl:                ($font-size-base * 1.5);
+$font-size-lg:                ($font-size-base * 1.25);
+$font-size-sm:                ($font-size-base * .875);
+$font-size-xs:                ($font-size-base * .75);
+
+$font-weight-light:           300 !default;
+$font-weight-normal:          400 !default;
+$font-weight-bold:            500 !default;
+$font-weight-extra-bold:      800 !default;
+
+$h1-font-size:                $font-size-base * 1.625 !default;
+$h2-font-size:                $font-size-base * 1.25 !default;
+$h3-font-size:                $font-size-base * 1.0625 !default;
+$h4-font-size:                $font-size-base * .9375 !default;
+$h5-font-size:                $font-size-base * .8125 !default;
+$h6-font-size:                $font-size-base * .625 !default;
