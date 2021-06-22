@@ -9,6 +9,7 @@ const Header = () => {
                 <p>YCB objects</p>
             </Col>
         </Row>
+        <hr/>
       </Container>
     )
 }

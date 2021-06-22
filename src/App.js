@@ -1,6 +1,7 @@
 import TopSection from './components/TopSection';
 import DashboardNavbar from './components/DashboardNavbar';
 import Header from './components/Header';
+import OutputContainer from './components/OutputContainer';
 
 function App() {
   return (
@@ -9,7 +10,7 @@ function App() {
         <DashboardNavbar/>
         <Header/>
         <TopSection/>
-            
+        <OutputContainer/>
       </div>
     </>
   );

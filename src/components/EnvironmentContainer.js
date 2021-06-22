@@ -1,9 +1,10 @@
 import React, { useRef, useEffect, useCallback, Suspense } from "react";
 import { Canvas, useFrame, useThree, extend } from "@react-three/fiber";
 import { useGLTF, Environment, Html, softShadows, Shadow } from "@react-three/drei";
+import { useObjectStore } from '../stores/ObjectStore';
+import { useAnnotationStore } from '../stores/AnnotationStore';
 import { ObjectControls } from '../ObjectControls';
 import { DragControls } from 'three-stdlib';
-import { useObjectStore } from '../stores/ObjectStore';
 extend({ DragControls, ObjectControls })
 
 softShadows()
@@ -13,7 +14,8 @@ const Banana = ({camPosition, ...props}) => {
     const object = useRef();
     const { nodes, materials } = useGLTF("/banana.gltf");
 
-    const { objPosition, objRotation, handleTranslation, handleRotation } = useObjectStore()
+    const { objPosition, objRotation, handleTranslation, handleRotation } = useObjectStore();
+    const { addAnnotation } = useAnnotationStore()
     
     const { camera, gl: { domElement }} = useThree();
     camera.position.set( camPosition.xCamPos, camPosition.yCamPos, camPosition.zCamPos)
@@ -44,6 +46,12 @@ const Banana = ({camPosition, ...props}) => {
 
     const annotateFrame = () => {
       console.log(object.current.position, object.current.rotation)
+      let dataAnnotation = {
+          id:1, 
+          position: object.current.position,
+          rotation: object.current.rotation
+      }
+      addAnnotation(dataAnnotation)
     }
     
     return (
@@ -71,8 +79,8 @@ const Banana = ({camPosition, ...props}) => {
             <directionalLight position={[4,3,3]} castShadow intensity={1.5} shadow-camera-far={70} />
         </mesh>
         
-        <dragControls args={[[ object.current ], camera, domElement]} /> 
-        { object.current && <objectControls args={[camera, domElement, object.current ]}/>}
+        { object.current && <dragControls args={[[ object.current ], camera, domElement]} /> }
+        { object.current && <objectControls args={[camera, domElement, object.current ]}/>  }
       </>
     );
 }

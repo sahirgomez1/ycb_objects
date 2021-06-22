@@ -3,6 +3,7 @@
     height: 100%;
     min-height: 90vh;
     background-color: $gray-100;
+    padding-bottom: 5vh;
 
     // Navbar
     .navbar-top {
@@ -16,6 +17,19 @@
         padding-right: $main-content-padding-x;
       
     }
+}
+
+.section-wrapper {
+    position: relative;
+    background-color: $gray-200;;
+    border-radius: 5px;
+    padding: 1rem;
+}
+
+.controls {
+    background-color: $gray-100;
+    border-radius: 5px;
+    padding: 1rem;
 }
 
 .video_overlays {
@@ -48,4 +62,15 @@
     z-index: 1;
 }
 
+.output {
+    background-color: $primary;
+    border-radius: 5px;
+    padding: 1rem;
+    height: 15vh;
+    overflow: auto;
+    code {
+        color: #f0f0f0;
+        font-size: small;
+    }
+}
 

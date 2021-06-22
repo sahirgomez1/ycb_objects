@@ -26,10 +26,11 @@ const TopSection = () => {
     };
 
     return (
-        <Container fluid="md">
+        <Container fluid="md" className="">
         <Row className="justify-content-center">
-            <Col md={3} >
-                <Tab.Container id="left-tabs-example" defaultActiveKey="camera">
+            <Col md={3} className="section-wrapper" >
+              <div className="controls">
+                <Tab.Container id="left-tabs-example" defaultActiveKey="camera" >
                     <Row>
                         <Col sm={6}>
                           <Nav variant="pills" className="flex-column">
@@ -109,6 +110,7 @@ const TopSection = () => {
                                   <FormControl 
                                     aria-describedby="scale"
                                     type="number" 
+                                    step="0.5"
                                     name="objScale"
                                     value={objScale || 1}
                                     onChange={e => setObjScale(e.target.value)}     
@@ -208,9 +210,11 @@ const TopSection = () => {
                         </Col>
                     </Row>
                 </Tab.Container>
+                <hr/>
+                <h6>Press shift to rotate object | Click to translate object</h6>
+                </div>
             </Col>
             <Col md={9} >
-                <h6 className="text-center">Press shift to rotate object</h6>
                 <div className="video_box">
                     <div className="video_overlays">
                       <div className="scene-container">
