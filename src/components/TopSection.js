@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Tab, Nav, FormControl, InputGroup } from "react-bootstrap";
-import EnvironmentContainer from './EnvironmentContainer';
-import video from '../rbgt_banana.mp4'
 import { useObjectStore } from '../stores/ObjectStore';
+import AnnotationView from './AnnotationView';
 
 const TopSection = () => {
 
@@ -212,21 +211,12 @@ const TopSection = () => {
                 </Tab.Container>
                 <hr/>
                 <h6>Press shift to rotate object | Click to translate object</h6>
-                </div>
+              </div>
             </Col>
-            <Col md={9} >
-                <div className="video_box">
-                    <div className="video_overlays">
-                      <div className="scene-container">
-                        <EnvironmentContainer 
-                          position={camPosition}
-                          objScale={objScale}/>
-                      </div>
-                    </div>
-                    
-                    <video src={video} controls></video>
-                    
-                </div>
+            <Col md={9}>
+              <AnnotationView 
+                camPosition={camPosition} 
+                objScale={objScale} />
             </Col>
         </Row>
       </Container>
@@ -234,4 +224,3 @@ const TopSection = () => {
 }
 
 export default TopSection;
-

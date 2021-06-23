@@ -75,3 +75,25 @@ $h3-font-size:                $font-size-base * 1.0625 !default;
 $h4-font-size:                $font-size-base * .9375 !default;
 $h5-font-size:                $font-size-base * .8125 !default;
 $h6-font-size:                $font-size-base * .625 !default;
+
+// Navbar
+
+$navbar-nav-link-font-size:                .5rem !default;
+$navbar-nav-link-font-weight:              500 !default;
+$navbar-nav-link-text-transform:           normal !default;
+$navbar-nav-link-letter-spacing:           0 !default;
+
+
+
+// Buttons + Forms
+
+$input-btn-font-size-sm:      .75rem !default;
+$input-btn-font-size:         .8rem !default;
+$input-btn-font-size-lg:      .85rem !default;
+
+// Dropdown
+
+$dropdown-bg:                    $white !default;
+$dropdown-border-width:          0 !default;
+$dropdown-border-color:          rgba($black, .15) !default;
+$dropdown-font-size:             .75rem !default;

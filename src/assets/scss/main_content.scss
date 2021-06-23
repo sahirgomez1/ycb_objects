@@ -40,7 +40,7 @@
     left: 0;
     right: 0;
     top: 0;
-    bottom: 60px;
+    bottom: 0;
 }
 
 .video_box {
@@ -60,6 +60,18 @@
     background-color: transparent;
     //background-color: #f0f0f0;
     z-index: 1;
+}
+
+.scene-tooltip {
+    padding-top: 5px;
+    transform: translate3d(50%, 0, 0);
+    text-align: center;
+    background: $primary;
+    color: white;
+    padding: 10px 10px;
+    border-radius: 5px;
+    font-size: xx-small;
+    
 }
 
 .output {

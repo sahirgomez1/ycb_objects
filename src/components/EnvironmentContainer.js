@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useCallback, Suspense } from "react";
+import React, { useRef, useEffect, useCallback, Suspense, useState } from "react";
 import { Canvas, useFrame, useThree, extend } from "@react-three/fiber";
 import { useGLTF, Environment, Html, softShadows, Shadow } from "@react-three/drei";
 import { useObjectStore } from '../stores/ObjectStore';
@@ -13,6 +13,7 @@ const Banana = ({camPosition, ...props}) => {
     const group = useRef();
     const object = useRef();
     const { nodes, materials } = useGLTF("/banana.gltf");
+    const [ hovered, setHover ] = useState(false)
 
     const { objPosition, objRotation, handleTranslation, handleRotation } = useObjectStore();
     const { addAnnotation } = useAnnotationStore()
@@ -45,11 +46,12 @@ const Banana = ({camPosition, ...props}) => {
     })
 
     const annotateFrame = () => {
-      console.log(object.current.position, object.current.rotation)
+      console.log(object.current)
       let dataAnnotation = {
           id:1, 
           position: object.current.position,
-          rotation: object.current.rotation
+          rotation: object.current.rotation,
+          scale: object.current.scale
       }
       addAnnotation(dataAnnotation)
     }
@@ -72,11 +74,19 @@ const Banana = ({camPosition, ...props}) => {
           receiveShadow 
           castShadow 
           position={[0, 0, -0.5]} 
-          onClick={annotateFrame}>
+          onClick={annotateFrame}
+          onPointerOver={(event) => setHover(true)}
+          onPointerOut={(event) => setHover(false)}
+        >
             <sphereBufferGeometry args={[0.05, 64, 64]} />
             <meshPhysicalMaterial color={'purple'} clearcoat={1} clearcoatRoughness={0} />
             <Shadow position-y={-0.79} rotation-x={-Math.PI / 2} opacity={0.6} scale={[0.8, 0.8, 1]} />
             <directionalLight position={[4,3,3]} castShadow intensity={1.5} shadow-camera-far={70} />
+            { hovered && 
+              <Html>
+                <div className="scene-tooltip">Click to annotate</div> 
+              </Html> 
+            }
         </mesh>
         
         { object.current && <dragControls args={[[ object.current ], camera, domElement]} /> }
