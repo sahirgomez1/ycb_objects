@@ -6,9 +6,9 @@ To install
 `git clone https://github.com/sahirgomez1/ycb_objects.git`
 
 In the project directory :
-`cd ycb_objects_app`
-you can run to install all dependencies
-`npm install`
+`cd ycb_objects_app`.\
+you can run
+`npm install` to install all dependencies.\
 then run
 `npm start`.
 

@@ -26,6 +26,7 @@ const AnnotationView = ({camPosition, objScale}) => {
 
     const player = useRef()
     const { 
+        url,
         playing, 
         played, 
         duration, 
@@ -70,7 +71,7 @@ const AnnotationView = ({camPosition, objScale}) => {
               ref={player}
               width='100%'
               height='auto'
-              url={"https://storage.turbo360.co/instagram_clone-vjcpvp/rbgt_banana.mp4"}
+              url={url}
               playing={playing}
               controls={false}
               loop={loop}
@@ -116,7 +117,7 @@ const AnnotationView = ({camPosition, objScale}) => {
                 </div>
                 <div className='d-flex align-items-center'>
                   <div className='player-control__time'>
-                    <FormattedTime seconds={ played * duration } />
+                    <FormattedTime seconds={ played * duration} />
                     {' / ' }
                     <FormattedTime seconds={ duration } />
                   </div>

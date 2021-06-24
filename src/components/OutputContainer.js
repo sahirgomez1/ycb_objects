@@ -12,6 +12,7 @@ const OutputContainer = () => {
         <Row className="section-wrapper">
           <div className="output">
             <code>Output: </code>
+            <br/>
             <code>{outputJSON}</code>
             
           </div>

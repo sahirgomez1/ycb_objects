@@ -1,7 +1,7 @@
 import create from 'zustand';
 
 const useVideoStore = create(set => ({
-    url: '',
+    url: "https://storage.turbo360.co/instagram_clone-vjcpvp/rbgt_banana.mp4",
     duration: 0,
     id :'react-player',
     played: 0,

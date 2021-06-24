@@ -3,6 +3,7 @@ import { Canvas, useFrame, useThree, extend } from "@react-three/fiber";
 import { useGLTF, Environment, Html, softShadows, Shadow } from "@react-three/drei";
 import { useObjectStore } from '../stores/ObjectStore';
 import { useAnnotationStore } from '../stores/AnnotationStore';
+import { useVideoStore } from '../stores/VideoStore';
 import { ObjectControls } from '../ObjectControls';
 import { DragControls } from 'three-stdlib';
 extend({ DragControls, ObjectControls })
@@ -16,6 +17,7 @@ const Banana = ({camPosition, ...props}) => {
     const [ hovered, setHover ] = useState(false)
 
     const { objPosition, objRotation, handleTranslation, handleRotation } = useObjectStore();
+    const videoState = useVideoStore()
     const { addAnnotation } = useAnnotationStore()
     
     const { camera, gl: { domElement }} = useThree();
@@ -47,13 +49,15 @@ const Banana = ({camPosition, ...props}) => {
 
     const annotateFrame = () => {
       console.log(object.current)
+      let video_metadata = { url: videoState.url }
       let dataAnnotation = {
-          id:1, 
+          id: videoState.played, 
+          time: (videoState.played * videoState.duration),
           position: object.current.position,
           rotation: object.current.rotation,
           scale: object.current.scale
       }
-      addAnnotation(dataAnnotation)
+      addAnnotation(video_metadata, dataAnnotation)
     }
     
     return (
