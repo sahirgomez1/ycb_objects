@@ -1,18 +1,25 @@
 # YCB Object 3d annotation
 
-## Available Scripts
+## Installation and running
 
-To install
-`git clone https://github.com/sahirgomez1/ycb_objects.git`
+To install. First clone the repo using:
+```
+git clone https://github.com/sahirgomez1/ycb_objects.git
+cd ycb_objects_app
+```
 
-In the project directory :
-`cd ycb_objects_app`.\
-you can run
-`npm install` to install all dependencies.\
-then run
-`npm start`.
+In the project directory, you can run
+```
+npm install
+```
+to install all dependencies. Then run.\
+```
+npm start
+```
 
 ### `npm start`
+
+Add your 3D objects to the public folder, use `.gltf` files.
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.

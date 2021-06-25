@@ -33,6 +33,7 @@ const AnnotationView = ({camPosition, objScale}) => {
         playbackRate,
         loop, 
         seeking,
+        setVideoDimensions,
         handleProgress,
         handleVideoPlayPause,
         handleVideoRewind,
@@ -67,24 +68,27 @@ const AnnotationView = ({camPosition, objScale}) => {
                   objScale={objScale}/>
               </div>
             </div>
-            <ReactPlayer
-              ref={player}
-              width='100%'
-              height='auto'
-              url={url}
-              playing={playing}
-              controls={false}
-              loop={loop}
-              playbackRate={playbackRate}
-              onReady={() => console.log('onReady')}
-              onStart={() => console.log('onStart')}
-              onBuffer={() => console.log('onBuffer')}
-              onSeek={e => console.log('onSeek', e)}
-              onEnded={handleEnded}
-              onError={e => console.log('onError', e)}
-              onProgress={onProgress}
-              onDuration={e => handleVideoDuration(e)}
-            />                         
+            <div className="player-wrapper">
+              <ReactPlayer
+                ref={player}
+                className='react-player'
+                width='100%'
+                height='100%'
+                url={url}
+                playing={playing}
+                controls={false}
+                loop={loop}
+                playbackRate={playbackRate}
+                onReady={(e) => setVideoDimensions(e)}
+                onStart={() => console.log('onStart')}
+                onBuffer={() => console.log('onBuffer')}
+                onSeek={e => console.log('onSeek', e)}
+                onEnded={handleEnded}
+                onError={e => console.log('onError', e)}
+                onProgress={onProgress}
+                onDuration={e => handleVideoDuration(e)}
+              />   
+            </div>                      
           </div>
           <div className="mt-2">
               <Slider

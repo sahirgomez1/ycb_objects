@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Tab, Nav, FormControl, InputGroup } from "react-bootstrap";
+import { Container, Row, Col, Tab, Nav, Form, FormControl, InputGroup } from "react-bootstrap";
 import { useObjectStore } from '../stores/ObjectStore';
+import { useVideoStore } from '../stores/VideoStore';
 import AnnotationView from './AnnotationView';
 
 const TopSection = () => {
@@ -8,7 +9,8 @@ const TopSection = () => {
     const [camPosition, setCamPosition] = useState({ xCamPos: 5, yCamPos:5, zCamPos:8, fov:4 })
     const [objScale, setObjScale] = useState(3)
 
-    const { objPosition, objRotation, handleTranslation, handleRotation } = useObjectStore()
+    const { objectSelected, defaultObjects, handleSelectObject, objPosition, objRotation, handleTranslation, handleRotation } = useObjectStore()
+    const { url, setVideoOnScene } = useVideoStore()
 
     const handleChangeCam = e => {
       const { name, value } = e.target;
@@ -26,8 +28,34 @@ const TopSection = () => {
 
     return (
         <Container fluid="md" className="">
-        <Row className="justify-content-center">
+          <Row className="justify-content-center">
             <Col md={3} className="section-wrapper" >
+              <div className="controls">
+                <Form.Group>
+                  <Form.Label><h6>Video</h6></Form.Label>
+                  <Form.Control 
+                    size="sm" 
+                    className="span2" 
+                    type="text" 
+                    placeholder="Enter video URL" 
+                    value={url}
+                    onChange={setVideoOnScene}
+                  />
+                  <Form.Label><h6>Select Object</h6></Form.Label>
+                  <Form.Control 
+                    size="sm" 
+                    as="select" 
+                    value={objectSelected.name} 
+                    onChange={(e) => handleSelectObject(e.target.value)}
+                  >
+                    {defaultObjects.map((obj, index) => (
+                      <option key={index} value={obj.name}>
+                        {obj.name}
+                      </option>
+                    ))}
+                  </Form.Control>
+                </Form.Group>
+              </div>
               <div className="controls">
                 <Tab.Container id="left-tabs-example" defaultActiveKey="camera" >
                     <Row>

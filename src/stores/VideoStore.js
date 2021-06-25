@@ -14,6 +14,8 @@ const useVideoStore = create(set => ({
     width: '100%',
     height: 'auto',
 
+    setVideoOnScene : (e) => set ( state => ({ url: e.target.value })),
+    setVideoDimensions : (e) => set (state => ({ videoHeight: e.wrapper.clientHeight, videoWidth: e.wrapper.clientWidth})),
     handleToggleLoop : () => set ( state => ({ loop: !state.loop})),
     handleVideoPlayPause : () => set (state => ({ playing : !state.playing })),
     handleVideoRewind : () => set (state => ({ playing: false, played: 0})),

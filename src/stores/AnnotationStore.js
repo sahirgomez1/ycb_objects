@@ -8,12 +8,14 @@ const addRecord = (list, annotation) => {
 }
 
 const useAnnotationStore = create(set => ({
-    outputAnnotation : { url: "", videoWidth: 500, videoHeight: 400, annotations:[] },
+    outputAnnotation : { url: "", videoWidth: 0, videoHeight: 0, annotations:[] },
     addAnnotation : (video_metadata, annotation) => 
         set(state => ({ 
             outputAnnotation: {
                 ...state.outputAnnotation,
                 url: video_metadata.url, 
+                videoWidth: video_metadata.videoWidth, 
+                videoHeight: video_metadata.videoHeight, 
                 annotations: addRecord(state.outputAnnotation.annotations, annotation)
             }
         })),

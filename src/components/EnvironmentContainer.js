@@ -13,12 +13,13 @@ softShadows()
 const Banana = ({camPosition, ...props}) => {
     const group = useRef();
     const object = useRef();
-    const { nodes, materials } = useGLTF("/banana.gltf");
-    const [ hovered, setHover ] = useState(false)
 
-    const { objPosition, objRotation, handleTranslation, handleRotation } = useObjectStore();
+    const { objectSelected, objPosition, objRotation, handleTranslation, handleRotation } = useObjectStore();
     const videoState = useVideoStore()
     const { addAnnotation } = useAnnotationStore()
+
+    const { nodes, materials } = useGLTF(objectSelected.gltfFile);
+    const [ hovered, setHover ] = useState(false)
     
     const { camera, gl: { domElement }} = useThree();
     camera.position.set( camPosition.xCamPos, camPosition.yCamPos, camPosition.zCamPos)
@@ -48,8 +49,12 @@ const Banana = ({camPosition, ...props}) => {
     })
 
     const annotateFrame = () => {
-      console.log(object.current)
-      let video_metadata = { url: videoState.url }
+      //console.log(object.current)
+      let video_metadata = { 
+          url: videoState.url, 
+          videoHeight: videoState.videoHeight, 
+          videoWidth: videoState.videoWidth 
+      }
       let dataAnnotation = {
           id: videoState.played, 
           time: (videoState.played * videoState.duration),
