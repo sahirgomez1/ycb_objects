@@ -12,14 +12,14 @@ In the project directory, you can run
 ```
 npm install
 ```
-to install all dependencies. Then run.\
+to install all dependencies. Then run.
 ```
 npm start
 ```
+Add your 3D objects to the public folder, use `.gltf` files. We suggest and [OBJ coverter](https://github.com/CesiumGS/obj2gltf), then optimize
+your glTF assets with `gltf-pipeline`, [more info](https://www.npmjs.com/package/gltf-pipeline) 
 
 ### `npm start`
-
-Add your 3D objects to the public folder, use `.gltf` files.
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
