@@ -5,6 +5,7 @@ const useVideoStore = create(set => ({
     duration: 0,
     id :'react-player',
     played: 0,
+    seekedTime: 0,
     playing: false,
     controls: false ,
     muted: true,
@@ -15,7 +16,9 @@ const useVideoStore = create(set => ({
     height: 'auto',
 
     setVideoOnScene : (e) => set ( state => ({ url: e.target.value })),
-    setVideoDimensions : (e) => set (state => ({ videoHeight: e.wrapper.clientHeight, videoWidth: e.wrapper.clientWidth})),
+    setVideoDimensions : (videoWidth, videoHeight) => set (state => ({ videoHeight: videoHeight, videoWidth: videoWidth})),
+    setVideoClientDimensions : (e) => set (state => ({ videoClientHeight: e.wrapper.clientHeight, videoClientWidth: e.wrapper.clientWidth})),
+    onSeekTime : (e) => set (state => ({seekedTime : e})),
     handleToggleLoop : () => set ( state => ({ loop: !state.loop})),
     handleVideoPlayPause : () => set (state => ({ playing : !state.playing })),
     handleVideoRewind : () => set (state => ({ playing: false, played: 0})),

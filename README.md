@@ -16,8 +16,8 @@ to install all dependencies. Then run.
 ```
 npm start
 ```
-Add your 3D objects to the public folder, use `.gltf` files. We suggest and [OBJ coverter](https://github.com/CesiumGS/obj2gltf), then optimize
-your glTF assets with `gltf-pipeline`, [more info](https://www.npmjs.com/package/gltf-pipeline) 
+Add your 3D objects to the public folder, use `.gltf` files. We suggest an [OBJ coverter](https://github.com/CesiumGS/obj2gltf), then optimize
+your glTF assets with `gltf-pipeline`, [more info](https://www.npmjs.com/package/gltf-pipeline). 
 
 ### `npm start`
 

@@ -113,7 +113,12 @@
         enabled: true,
         from: Math.PI ,
         to: Math.PI
-      }
+      },
+      z: {
+        enabled: true,
+        from: Math.PI,
+        to: Math.PI
+      },
     };
   
     let
@@ -187,7 +192,6 @@
           x: e.offsetX - previousMousePosition.x,
           y: e.offsetY - previousMousePosition.y
         };
-  
         previousMousePosition = { x: e.offsetX, y: e.offsetY };
   
         if (horizontalRotationEnabled && deltaMove.x !== 0)
@@ -209,6 +213,21 @@
           if (!isWithinMaxAngle(Math.sign(deltaMove.y) * rotationSpeed, 'x'))
             return;
           mesh.rotation.x += Math.sign(deltaMove.y) * rotationSpeed;
+          flag = mouseFlags.MOUSEMOVE;
+        }
+      } 
+      // To rotate over Z
+      if (isDragging && e.ctrlKey) {
+        const deltaMove = {
+          x: e.offsetX - previousMousePosition.x,
+          y: e.offsetY - previousMousePosition.y
+        };
+        previousMousePosition = { x: e.offsetX, y: e.offsetY };
+        
+        if (horizontalRotationEnabled && deltaMove.x !== 0 ){   
+          if (!isWithinMaxAngle(Math.sign(deltaMove.x) * rotationSpeed, 'z'))
+            return;
+          mesh.rotation.z += Math.sign(deltaMove.x) * rotationSpeed;
           flag = mouseFlags.MOUSEMOVE;
         }
       }

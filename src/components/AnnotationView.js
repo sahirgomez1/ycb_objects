@@ -4,6 +4,8 @@ import ReactPlayer from 'react-player';
 import EnvironmentContainer from './EnvironmentContainer';
 import FormattedTime from '../components/videoPlayer/FormattedTime';
 import { useVideoStore } from '../stores/VideoStore';
+import { useAnnotationStore } from '../stores/AnnotationStore';
+import { useObjectStore } from '../stores/ObjectStore'
 
 const Slider = ({ onMouseUp, onMouseDown, onChange, played }) => (
     <div>
@@ -34,6 +36,7 @@ const AnnotationView = ({camPosition, objScale}) => {
         loop, 
         seeking,
         setVideoDimensions,
+        onSeekTime,
         handleProgress,
         handleVideoPlayPause,
         handleVideoRewind,
@@ -44,14 +47,38 @@ const AnnotationView = ({camPosition, objScale}) => {
         handleSeekChange,
         handleVideoSpeedChange } = useVideoStore();
     
+    const annotationStore = useAnnotationStore();
+    const objectStore = useObjectStore();
+
+    const findAnnotation = t => {
+      //if (!editMode) return
+      let currentAnnotations = annotationStore.outputAnnotation.annotations
+      //if (!currentAnnotations) return
+      let annotation = currentAnnotations.find(x => x.time === t)
+      //console.log(currentAnnotations)
+      if (annotation !== undefined) {
+        objectStore.handleRotation(annotation.rotation)
+        objectStore.handleTranslation(annotation.position)
+      }
+      return
+    }
+    
     const handleSeekMouseUp = e => {
       handleSeekingtoFalse()
       player.current.seekTo(parseFloat(e.target.value))
+      findAnnotation(parseFloat(e.target.value))
     }
 
     const handleRewind = () => {
       handleVideoRewind()
       player.current.seekTo(0);
+    }
+
+    const onVideoReady = (e) => {
+      const videoWidth = player.current.getInternalPlayer().videoWidth;
+      const videoHeight = player.current.getInternalPlayer().videoHeight;
+      setVideoDimensions(videoWidth, videoHeight)
+      annotationStore.setVideoMetadata(e)
     }
 
     const onProgress = state => {
@@ -79,10 +106,11 @@ const AnnotationView = ({camPosition, objScale}) => {
                 controls={false}
                 loop={loop}
                 playbackRate={playbackRate}
-                onReady={(e) => setVideoDimensions(e)}
+                progressInterval={1000 / 30}
+                onReady={(e) => onVideoReady(e)}
                 onStart={() => console.log('onStart')}
                 onBuffer={() => console.log('onBuffer')}
-                onSeek={e => console.log('onSeek', e)}
+                onSeek={e => onSeekTime(e)}
                 onEnded={handleEnded}
                 onError={e => console.log('onError', e)}
                 onProgress={onProgress}

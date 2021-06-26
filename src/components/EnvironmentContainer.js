@@ -22,26 +22,28 @@ const Banana = ({camPosition, ...props}) => {
     const [ hovered, setHover ] = useState(false)
     
     const { camera, gl: { domElement }} = useThree();
+    const state = useThree();
     camera.position.set( camPosition.xCamPos, camPosition.yCamPos, camPosition.zCamPos)
     const position = Object.values(objPosition)
     const rotation = Object.values(objRotation)
 
-    const handleShiftKey = useCallback((e) => {
-      if (!e.shiftKey) {
+    const handleKeys = useCallback((e) => {
+      if (!e.shiftKey || !e.ctrKey) {
         handleRotation(object.current.rotation)
       } return
     }, [handleRotation]); 
 
     useEffect(() => {
-      window.addEventListener('keyup', handleShiftKey);
+      window.addEventListener('keyup', handleKeys);
       return () => {
-        window.removeEventListener('keyup', handleShiftKey);
+        window.removeEventListener('keyup', handleKeys);
       };
-    }, [handleShiftKey]);
+    }, [handleKeys]);
     
     useFrame((state) => {
       //state.camera.fov = THREE.MathUtils.lerp(state.camera.fov, 7, step)
       //state.camera.position.lerp(vec.set( position.xCamPos, position.yCamPos, 10), step)
+      state.clock.autoStart = false
       state.camera.fov = camPosition.fov     
       state.camera.lookAt(0,0,0)
       state.camera.updateProjectionMatrix()
@@ -49,21 +51,31 @@ const Banana = ({camPosition, ...props}) => {
     })
 
     const annotateFrame = () => {
-      //console.log(object.current)
-      let video_metadata = { 
-          url: videoState.url, 
-          videoHeight: videoState.videoHeight, 
-          videoWidth: videoState.videoWidth 
-      }
+      state.clock.start()
+      //console.log(state.clock.oldTime)
+      //rotateXYZ()
       let dataAnnotation = {
-          id: videoState.played, 
+          id:(videoState.played * videoState.duration), 
           time: (videoState.played * videoState.duration),
-          position: object.current.position,
-          rotation: object.current.rotation,
-          scale: object.current.scale
+          position: {x: object.current.position.x,y: object.current.position.y,z: object.current.position.z},
+          rotation: {_x: object.current.rotation._x, _y: object.current.rotation._y, _z: object.current.rotation._z},
+          scale: object.current.scale.x
       }
-      addAnnotation(video_metadata, dataAnnotation)
+      addAnnotation(dataAnnotation)
     }
+
+    const rotateXYZ = () => {
+      object.current.rotation.set(0,0,0)
+      object.current.position.set(0,0,0)
+    }
+
+    /*useFrame(({ clock }) => {
+      clock.autoStart = false
+      if (clock.elapsedTime < 3) {
+        object.current.rotation.x += Math.PI/2
+        //object.current.position.set(0,0,0)
+      }
+    })*/
     
     return (
       <>

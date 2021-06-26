@@ -9,7 +9,6 @@ const useObjectStore = create((set) => ({
   objectSelected: { name: "Banana", gltfFile: "/banana.gltf" },
   objPosition: { x: 0, y: 0.2, z: 0 },
   objRotation: { _x: Math.PI / 2, _y: 0, _z: 0 },
-  
   handleSelectObject: (e) =>
     set((state) => ({
       objectSelected: state.defaultObjects.find((i) => i.name === e),
