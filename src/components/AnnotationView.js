@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { Dropdown, Button, ButtonGroup } from 'react-bootstrap';
 import ReactPlayer from 'react-player';
 import EnvironmentContainer from './EnvironmentContainer';
+import { getFixedNumber } from '../utils/MathUtils';
 import FormattedTime from '../components/videoPlayer/FormattedTime';
 import { useVideoStore } from '../stores/VideoStore';
 import { useAnnotationStore } from '../stores/AnnotationStore';
@@ -64,6 +65,7 @@ const AnnotationView = ({camPosition, objScale}) => {
     }
     
     const handleSeekMouseUp = e => {
+      
       handleSeekingtoFalse()
       player.current.seekTo(parseFloat(e.target.value))
       findAnnotation(parseFloat(e.target.value))

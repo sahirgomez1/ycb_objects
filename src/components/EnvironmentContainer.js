@@ -14,7 +14,7 @@ const Banana = ({camPosition, ...props}) => {
     const group = useRef();
     const object = useRef();
 
-    const { objectSelected, objPosition, objRotation, handleTranslation, handleRotation } = useObjectStore();
+    const { objectSelected, objPosition, objRotation, objScale, handleTranslation, handleRotation } = useObjectStore();
     const videoState = useVideoStore()
     const { addAnnotation } = useAnnotationStore()
 
@@ -28,7 +28,7 @@ const Banana = ({camPosition, ...props}) => {
     const rotation = Object.values(objRotation)
 
     const handleKeys = useCallback((e) => {
-      if (!e.shiftKey || !e.ctrKey) {
+      if (!e.shiftKey || !e.ctrlKey) {
         handleRotation(object.current.rotation)
       } return
     }, [handleRotation]); 
@@ -84,7 +84,7 @@ const Banana = ({camPosition, ...props}) => {
               ref={object}
               geometry={nodes.Node.geometry}
               material={materials.material_0}
-              scale={props.objScale}
+              scale={objScale}
               position={position} 
               rotation={rotation}
               onPointerUp={(e) => handleTranslation(object.current.position) }
@@ -96,8 +96,8 @@ const Banana = ({camPosition, ...props}) => {
           castShadow 
           position={[0, 0, -0.5]} 
           onClick={annotateFrame}
-          onPointerOver={(event) => setHover(true)}
-          onPointerOut={(event) => setHover(false)}
+          onPointerOver={(e) => setHover(true)}
+          onPointerOut={(e) => setHover(false)}
         >
             <sphereBufferGeometry args={[0.05, 64, 64]} />
             <meshPhysicalMaterial color={'purple'} clearcoat={1} clearcoatRoughness={0} />
@@ -120,14 +120,14 @@ const Loader = () => {
   return <Html center> Loading... </Html>
 }
 
-const EnvironmentContainer = ({position, ...props}) => {
+const EnvironmentContainer = ({position}) => {
 
     return (
         <>
           <Canvas shadows>   
             <ambientLight intensity={0.5} />
             <Suspense fallback={<Loader/>}>
-              <Banana camPosition={position} objScale={props.objScale}/>
+              <Banana camPosition={position}/>
               <Environment preset="lobby" />                
             </Suspense>
             <axesHelper />      

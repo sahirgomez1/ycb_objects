@@ -7,16 +7,14 @@ import AnnotationView from './AnnotationView';
 const TopSection = () => {
 
     const [camPosition, setCamPosition] = useState({ xCamPos: 5, yCamPos:5, zCamPos:8, fov:4 })
-    const [objScale, setObjScale] = useState(3)
-
-    const { objectSelected, defaultObjects, handleSelectObject, objPosition, objRotation, handleTranslation, handleRotation } = useObjectStore()
+    const { objectSelected, defaultObjects, handleSelectObject, objPosition, objRotation, objScale, handleTranslation, handleRotation, setObjScale } = useObjectStore()
     const { url, setVideoOnScene } = useVideoStore()
 
     const handleChangeCam = e => {
       const { name, value } = e.target;
       setCamPosition({ ...camPosition, [name]: parseFloat(value) })
     };
-    const handleChangeObj = e => {
+    const handleObjPosition = e => {
       const { name, value } = e.target;
       const newObjPosition = { ...objPosition, [name]: parseFloat(value) }
       handleTranslation({...newObjPosition})
@@ -155,7 +153,7 @@ const TopSection = () => {
                                     name="x"
                                     step="0.05"
                                     value={objPosition.x || 0}
-                                    onChange={handleChangeObj}     
+                                    onChange={handleObjPosition}     
                                   />
                                 </InputGroup>
                                 <InputGroup size="sm" className="mb-3">
@@ -169,7 +167,7 @@ const TopSection = () => {
                                     name="y" 
                                     step="0.05"
                                     value={objPosition.y || 0}
-                                    onChange={handleChangeObj}     
+                                    onChange={handleObjPosition}     
                                   />
                                 </InputGroup>
                                 <InputGroup size="sm" className="mb-3">
@@ -183,12 +181,12 @@ const TopSection = () => {
                                     name="z"
                                     step="0.05"
                                     value={objPosition.z || 0}
-                                    onChange={handleChangeObj}     
+                                    onChange={handleObjPosition}     
                                   />
                                 </InputGroup>
                                 <label className="h5"> ROTATION (deg) </label>
                                 <InputGroup size="sm" className="mb-3">
-                                  <label>X: {Math.round(objRotation._x * (180 / Math.PI) * 10) / 10} </label>
+                                  <label className="h5">X: {Math.round(objRotation._x * (180 / Math.PI) * 10) / 10} </label>
                                   <input 
                                     type="range" 
                                     className="tactile-slider" 
@@ -202,7 +200,7 @@ const TopSection = () => {
                                   </input>
                                 </InputGroup>
                                 <InputGroup size="sm" className="mb-3">
-                                  <label>Y: {Math.round(objRotation._y * (180 / Math.PI) * 10) / 10} </label>
+                                  <label className="h5">Y: {Math.round(objRotation._y * (180 / Math.PI) * 10) / 10} </label>
                                   <input 
                                     type="range" 
                                     className="tactile-slider" 
@@ -216,7 +214,7 @@ const TopSection = () => {
                                   </input>
                                 </InputGroup>
                                 <InputGroup size="sm" className="mb-3">
-                                  <label>Z: {Math.round(objRotation._z * (180 / Math.PI) * 10) / 10}</label>
+                                  <label className="h5">Z: {Math.round(objRotation._z * (180 / Math.PI) * 10) / 10}</label>
                                   <input 
                                     type="range" 
                                     className="tactile-slider" 
@@ -238,7 +236,11 @@ const TopSection = () => {
                     </Row>
                 </Tab.Container>
                 <hr/>
-                <h6>Press shift to rotate object | Click to translate object</h6>
+                <h6>
+                  Press Shift to rotate object over X and Y, 
+                  press Control to rotate over Z <br/> 
+                  Click to translate object
+                </h6>
               </div>
             </Col>
             <Col md={9}>

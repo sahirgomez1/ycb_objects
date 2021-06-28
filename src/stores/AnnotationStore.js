@@ -9,7 +9,7 @@ const addRecord = (list, annotation) => {
     const modifiedList = list.map((o) => (o.id === annotation.id ? annotation : o));
     return modifiedList;
   }
-};
+};  // Add a new annotation to the queue, it replaces old annotation or add new
 
 const useAnnotationStore = create((set, get) => ({
   outputAnnotation: { url: "", videoWidth: 0, videoHeight: 0, annotations: [] },
@@ -22,6 +22,7 @@ const useAnnotationStore = create((set, get) => ({
         videoWidth: e.getInternalPlayer().videoWidth
       },
     })),
+  setAnnotationsFromFile: (fileContent) => set ((state) => ({outputAnnotation : fileContent})),
   addAnnotation: (annotation) =>
     set(
       (state) => (
