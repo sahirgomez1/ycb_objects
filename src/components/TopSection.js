@@ -246,7 +246,7 @@ const TopSection = () => {
             <Col md={9}>
               <AnnotationView 
                 camPosition={camPosition} 
-                objScale={objScale} />
+              />
             </Col>
         </Row>
       </Container>

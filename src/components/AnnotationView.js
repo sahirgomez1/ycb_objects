@@ -51,24 +51,27 @@ const AnnotationView = ({camPosition, objScale}) => {
     const annotationStore = useAnnotationStore();
     const objectStore = useObjectStore();
 
-    const findAnnotation = t => {
+    const findAnnotation = (t) => {
       //if (!editMode) return
+      const secondsLapsed = t * duration;
       let currentAnnotations = annotationStore.outputAnnotation.annotations
-      //if (!currentAnnotations) return
-      let annotation = currentAnnotations.find(x => x.time === t)
-      //console.log(currentAnnotations)
+      if (currentAnnotations.length <= 0) return
+      const annotation = currentAnnotations.reduce((prev, curr) => {
+        let closest = (Math.abs(curr.time - secondsLapsed) < Math.abs(prev.time - secondsLapsed) ? curr : prev)
+        return closest
+      });
+
       if (annotation !== undefined) {
         objectStore.handleRotation(annotation.rotation)
         objectStore.handleTranslation(annotation.position)
+        objectStore.setObjScale(annotation.scale)
       }
       return
     }
     
-    const handleSeekMouseUp = e => {
-      
+    const handleSeekMouseUp = e => {   
       handleSeekingtoFalse()
-      player.current.seekTo(parseFloat(e.target.value))
-      findAnnotation(parseFloat(e.target.value))
+      player.current.seekTo(getFixedNumber(e.target.value, 5))
     }
 
     const handleRewind = () => {
@@ -84,7 +87,15 @@ const AnnotationView = ({camPosition, objScale}) => {
     }
 
     const onProgress = state => {
-      if (!seeking) handleProgress(state.played)
+      const { played } = state
+      if (!seeking) handleProgress(getFixedNumber(played, 5))
+      findAnnotation(played)
+    }
+
+    const onSliderChange = (e) => {
+      let t = getFixedNumber(e.target.value, 5)
+      handleSeekChange(t)
+      findAnnotation(t)
     }
 
     return (
@@ -123,9 +134,9 @@ const AnnotationView = ({camPosition, objScale}) => {
           <div className="mt-2">
               <Slider
                 played={ played }
-                onMouseDown={(e) => handleSeekMouseDown(e)}
-                onChange={(e) => handleSeekChange(e)}
-                onMouseUp={(e) => handleSeekMouseUp(e)}
+                onMouseDown={handleSeekMouseDown}
+                onChange={onSliderChange}
+                onMouseUp={handleSeekMouseUp}
               />
               <div className='d-flex mt-2 justify-content-between'>
                 <div className='d-flex align-items-center'>

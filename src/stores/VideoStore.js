@@ -27,7 +27,9 @@ const useVideoStore = create(set => ({
     handleProgress: (played) => set(state => ({ played: played })),
     handleSeekingtoFalse: () => set (state => ({ seeking: false })), 
     handleSeekMouseDown: (e) => set (state => ({ seeking: true })),
-    handleSeekChange : (e) => set (state => ({ played : parseFloat(e.target.value) })),
+    handleSeekChange : (played) => set (state => ({ 
+      played : played 
+    })),
     handleVideoSpeedChange : (speed) => set(state => ({ playbackRate: speed }))
 }))
 

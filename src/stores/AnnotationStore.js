@@ -4,9 +4,15 @@ const addRecord = (list, annotation) => {
   let ann_found = list.some((o) => o.id === annotation.id);   // Check if annotation already exists
   if (!ann_found) {
     list.push(annotation)
+    list.sort((a, b) => {
+      return a.time - b.time;
+    });
     return list;
   } else {
     const modifiedList = list.map((o) => (o.id === annotation.id ? annotation : o));
+    modifiedList.sort((a, b) => {
+      return a.time - b.time;
+    });
     return modifiedList;
   }
 };  // Add a new annotation to the queue, it replaces old annotation or add new
