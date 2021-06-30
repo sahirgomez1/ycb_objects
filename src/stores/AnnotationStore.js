@@ -19,6 +19,8 @@ const addRecord = (list, annotation) => {
 
 const useAnnotationStore = create((set, get) => ({
   outputAnnotation: { url: "", videoWidth: 0, videoHeight: 0, annotations: [] },
+  reviewMode : false,
+  setReviewMode : () => set((state) => ({ reviewMode : !state.reviewMode})),
   setVideoMetadata: (e) =>
     set((state) => ({
       outputAnnotation: {

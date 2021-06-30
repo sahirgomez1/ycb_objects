@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { Dropdown, Button, ButtonGroup } from 'react-bootstrap';
 import ReactPlayer from 'react-player';
-import EnvironmentContainer from './EnvironmentContainer';
+import SceneContainer from './SceneContainer';
 import { getFixedNumber } from '../utils/MathUtils';
 import FormattedTime from '../components/videoPlayer/FormattedTime';
 import { useVideoStore } from '../stores/VideoStore';
@@ -103,9 +103,9 @@ const AnnotationView = ({camPosition, objScale}) => {
           <div className="video_box">
             <div className="video_overlays">
               <div className="scene-container">
-                <EnvironmentContainer 
+                <SceneContainer 
                   position={camPosition}
-                  objScale={objScale}/>
+                />
               </div>
             </div>
             <div className="player-wrapper">

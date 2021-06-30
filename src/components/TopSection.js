@@ -135,7 +135,7 @@ const TopSection = () => {
                                   <FormControl 
                                     aria-describedby="scale"
                                     type="number" 
-                                    step="0.5"
+                                    step="0.1"
                                     name="objScale"
                                     value={objScale || 1}
                                     onChange={e => setObjScale(e.target.value)}     
@@ -239,7 +239,7 @@ const TopSection = () => {
                 <h6>
                   Press Shift to rotate object over X and Y, 
                   press Control to rotate over Z <br/> 
-                  Click to translate object
+                  Click and drag object to translate.
                 </h6>
               </div>
             </Col>

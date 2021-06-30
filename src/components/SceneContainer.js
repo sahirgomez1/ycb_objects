@@ -17,7 +17,7 @@ const Banana = ({camPosition, ...props}) => {
 
     const { objectSelected, objPosition, objRotation, objScale, handleTranslation, handleRotation } = useObjectStore();
     const videoState = useVideoStore()
-    const { addAnnotation } = useAnnotationStore()
+    const { addAnnotation, reviewMode } = useAnnotationStore()
 
     const { nodes, materials } = useGLTF(objectSelected.gltfFile);
     const [ hovered, setHover ] = useState(false)
@@ -25,15 +25,13 @@ const Banana = ({camPosition, ...props}) => {
     const { camera, gl: { domElement }} = useThree();
     const state = useThree();
     camera.position.set( camPosition.xCamPos, camPosition.yCamPos, camPosition.zCamPos)
-    const position = Object.values(objPosition)
+    //const position = Object.values(objPosition)
     const rotation = Object.values(objRotation)
-
-    const editmode = false
 
     const [vec] = useState(() => new THREE.Vector3())
 
     useFrame(() => {
-      if (!editmode) {
+      if (reviewMode) {
         object.current.position.lerp(vec.set(objPosition.x, objPosition.y, objPosition.z), 0.1)
       } 
     })
@@ -81,7 +79,7 @@ const Banana = ({camPosition, ...props}) => {
               geometry={nodes.Node.geometry}
               material={materials.material_0}
               scale={objScale}
-              position={null} 
+              //position={position} 
               rotation={rotation}
               onPointerUp={(e) => handleTranslation(object.current.position) }
             /> 
@@ -116,7 +114,7 @@ const Loader = () => {
   return <Html center> Loading... </Html>
 }
 
-const EnvironmentContainer = ({position}) => {
+const SceneContainer = ({position}) => {
 
     return (
         <>
@@ -132,4 +130,4 @@ const EnvironmentContainer = ({position}) => {
     )
 }
 
-export default EnvironmentContainer;
+export default SceneContainer;

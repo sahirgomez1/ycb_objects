@@ -33,11 +33,16 @@ const OutputContainer = () => {
             <code>{outputJSON}</code>
           </div>
         </Col>
-        <Col md="2" className="align-items-center">
-          <Row className="text-center mt-2">
-            <Button size="sm" variant="light">
-              Edit
-            </Button>{" "}
+        <Col md="2" className="">
+          <Row className="text-center mt-2 px-2">
+            <h5>Review</h5>
+            <div className="switch_box box_1">
+              <input 
+                type="checkbox" 
+                className="switch_1"
+                checked={annotationStore.editMode} 
+                onChange={annotationStore.setReviewMode}/>
+            </div>  
           </Row>
           <hr />
           <Row className="text-center mt-2">
@@ -46,12 +51,13 @@ const OutputContainer = () => {
               <Button
                 size="sm"
                 variant="success"
+                className="px-3"
                 href={`data:text/json;charset=utf-8,${encodeURIComponent(
                   JSON.stringify(annotationStore.outputAnnotation, null, 4)
                 )}`}
                 download="3Dannotation.json"
               >
-                Download
+                Export
               </Button>
             </Col>
             <Col>
@@ -61,7 +67,7 @@ const OutputContainer = () => {
                 className="px-3"
                 onClick={upload}
               >
-                Upload
+                Import
               </Button>
 
               <input
