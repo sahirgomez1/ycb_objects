@@ -1,9 +1,11 @@
 import useObjectStore from './ObjectStore';
-import useAnnotationStore from './AnnotationStore';
+import useCameraStore from './CameraStore';
 import useVideoStore from './VideoStore';
+import useAnnotationStore from './AnnotationStore';
 
 export {
     useObjectStore,
+    useCameraStore,
     useAnnotationStore,
     useVideoStore
 };

@@ -4,7 +4,7 @@ import ReactPlayer from "react-player";
 import SceneContainer from "./SceneContainer";
 import { getFixedNumber } from "../utils/MathUtils";
 import FormattedTime from "../components/videoPlayer/FormattedTime";
-import { useObjectStore, useAnnotationStore, useVideoStore } from '../stores';
+import { useObjectStore, useCameraStore, useAnnotationStore, useVideoStore } from '../stores';
 
 /**
  * Video player slide component.
@@ -38,8 +38,7 @@ const Slider = ({ onMouseUp, onMouseDown, onChange, played }) => (
  * @param {Object} props.camPosition object containing position and field of view of camera properties
  * @returns
  */
-
-const AnnotationView = ({ camPosition }) => {
+const AnnotationView = () => {
   const player = useRef();
   const {
     url,
@@ -64,6 +63,7 @@ const AnnotationView = ({ camPosition }) => {
 
   const annotationStore = useAnnotationStore();
   const objectStore = useObjectStore();
+  const { camPosition } = useCameraStore();
 
   const findAnnotation = (t) => {
     if (!annotationStore.reviewMode) return
