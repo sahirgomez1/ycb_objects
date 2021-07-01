@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import { useAnnotationStore } from "../stores/AnnotationStore";
+import { useAnnotationStore } from '../stores';
 
 const OutputContainer = () => {
   const inputFile = useRef();

@@ -1,9 +1,7 @@
 import React, { useRef, useEffect, useCallback, Suspense, useState } from "react";
 import { Canvas, useFrame, useThree, extend } from "@react-three/fiber";
 import { useGLTF, Environment, Html, softShadows, Shadow } from "@react-three/drei";
-import { useObjectStore } from '../stores/ObjectStore';
-import { useAnnotationStore } from '../stores/AnnotationStore';
-import { useVideoStore } from '../stores/VideoStore';
+import { useObjectStore, useAnnotationStore, useVideoStore } from '../stores';
 import { ObjectControls } from '../ObjectControls';
 import { DragControls } from 'three-stdlib';
 import * as THREE from "three";
@@ -23,17 +21,15 @@ const Banana = ({camPosition, ...props}) => {
     const [ hovered, setHover ] = useState(false)
     
     const { camera, gl: { domElement }} = useThree();
-    const state = useThree();
+
     camera.position.set( camPosition.xCamPos, camPosition.yCamPos, camPosition.zCamPos)
-    //const position = Object.values(objPosition)
+    const position = Object.values(objPosition)
     const rotation = Object.values(objRotation)
 
     const [vec] = useState(() => new THREE.Vector3())
 
     useFrame(() => {
-      if (reviewMode) {
-        object.current.position.lerp(vec.set(objPosition.x, objPosition.y, objPosition.z), 0.1)
-      } 
+      if (reviewMode) object.current.position.lerp(vec.set(objPosition.x, objPosition.y, objPosition.z), 0.1)
     })
 
     const handleKeys = useCallback((e) => {
@@ -60,7 +56,6 @@ const Banana = ({camPosition, ...props}) => {
     })
 
     const annotateFrame = () => {
-      state.clock.start()
       let dataAnnotation = {
           id:(videoState.played * videoState.duration), 
           time: (videoState.played * videoState.duration),
@@ -79,7 +74,7 @@ const Banana = ({camPosition, ...props}) => {
               geometry={nodes.Node.geometry}
               material={materials.material_0}
               scale={objScale}
-              //position={position} 
+              position={!reviewMode ? position : null} 
               rotation={rotation}
               onPointerUp={(e) => handleTranslation(object.current.position) }
             /> 

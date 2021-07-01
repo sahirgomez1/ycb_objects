@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Tab, Nav, Form, FormControl, InputGroup } from "react-bootstrap";
-import { useObjectStore } from '../stores/ObjectStore';
-import { useVideoStore } from '../stores/VideoStore';
+import { useObjectStore, useVideoStore } from '../stores';
 import AnnotationView from './AnnotationView';
 
 const TopSection = () => {
@@ -237,8 +236,8 @@ const TopSection = () => {
                 </Tab.Container>
                 <hr/>
                 <h6>
-                  Press Shift to rotate object over X and Y, 
-                  press Control to rotate over Z <br/> 
+                  Press Shift to rotate object over X,Y. <br/>
+                  Press Control to rotate over Z <br/> 
                   Click and drag object to translate.
                 </h6>
               </div>

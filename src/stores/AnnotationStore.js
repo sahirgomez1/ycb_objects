@@ -18,7 +18,7 @@ const addRecord = (list, annotation) => {
 };  // Add a new annotation to the queue, it replaces old annotation or add new
 
 const useAnnotationStore = create((set, get) => ({
-  outputAnnotation: { url: "", videoWidth: 0, videoHeight: 0, annotations: [] },
+  outputAnnotation: { url: "", videoWidth: 0, videoHeight: 0, object_3d: "", annotations: [] },
   reviewMode : false,
   setReviewMode : () => set((state) => ({ reviewMode : !state.reviewMode})),
   setVideoMetadata: (e) =>
@@ -30,6 +30,7 @@ const useAnnotationStore = create((set, get) => ({
         videoWidth: e.getInternalPlayer().videoWidth
       },
     })),
+  setObjectFile: (object) => set ((state) => ({outputAnnotation: {...state.outputAnnotation, object_3d: object.gltfFile }})), 
   setAnnotationsFromFile: (fileContent) => set ((state) => ({outputAnnotation : fileContent})),
   addAnnotation: (annotation) =>
     set(
@@ -48,4 +49,4 @@ const useAnnotationStore = create((set, get) => ({
   },
 }));
 
-export { useAnnotationStore };
+export default useAnnotationStore;

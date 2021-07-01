@@ -34,4 +34,4 @@ const useVideoStore = create(set => ({
 }))
 
 
-export { useVideoStore };
+export default useVideoStore;

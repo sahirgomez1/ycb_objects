@@ -24,7 +24,7 @@ const useObjectStore = create((set) => ({
         _z: newRotation._z,
       },
     })),
-  setObjScale: (scale) => set((state) => ({objScale: scale}))  
+  setObjScale: (scale) => set((state) => ({ objScale: scale })),
 }));
 
-export { useObjectStore };
+export default useObjectStore;
