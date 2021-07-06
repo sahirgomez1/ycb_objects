@@ -1,5 +1,12 @@
 import create from "zustand";
 
+/**
+ * Add new annotation item to the annotations array in the global state, it replaces old annotation or add new one.
+ * 
+ * @param {Array} list Array of current annotations 
+ * @param {Object} annotation New object annotation.
+ * @returns 
+ */
 const addRecord = (list, annotation) => {
   let ann_found = list.some((o) => o.id === annotation.id);   // Check if annotation already exists
   if (!ann_found) {
@@ -15,34 +22,44 @@ const addRecord = (list, annotation) => {
     });
     return modifiedList;
   }
-};  // Add a new annotation to the queue, it replaces old annotation or add new
+}; 
 
 const useAnnotationStore = create((set, get) => ({
-  outputAnnotation: { url: "", videoWidth: 0, videoHeight: 0, object_3d: "", annotations: [] },
-  reviewMode : false,
-  setReviewMode : () => set((state) => ({ reviewMode : !state.reviewMode})),
+  outputAnnotation: {
+    url: "",
+    videoWidth: 0,
+    videoHeight: 0,
+    object_3d: "",
+    annotations: [],
+  },
+  reviewMode: false,
+
+  setReviewMode: () => set((state) => ({ reviewMode: !state.reviewMode })),
   setVideoMetadata: (e) =>
     set((state) => ({
       outputAnnotation: {
         ...state.outputAnnotation,
         url: e.props.url,
         videoHeight: e.getInternalPlayer().videoHeight,
-        videoWidth: e.getInternalPlayer().videoWidth
+        videoWidth: e.getInternalPlayer().videoWidth,
       },
     })),
-  setObjectFile: (object) => set ((state) => ({outputAnnotation: {...state.outputAnnotation, object_3d: object.gltfFile }})), 
-  setAnnotationsFromFile: (fileContent) => set ((state) => ({outputAnnotation : fileContent})),
+  setObjectFile: (object) =>
+    set((state) => ({
+      outputAnnotation: {
+        ...state.outputAnnotation,
+        object_3d: object.gltfFile,
+      },
+    })),
+  setAnnotationsFromFile: (fileContent) =>
+    set((state) => ({ outputAnnotation: fileContent })),
   addAnnotation: (annotation) =>
-    set(
-      (state) => (
-        {
-          outputAnnotation: {
-            ...state.outputAnnotation,
-            annotations: addRecord(state.outputAnnotation.annotations, annotation),
-          },
-        }
-      )
-    ),
+    set((state) => ({
+      outputAnnotation: {
+        ...state.outputAnnotation,
+        annotations: addRecord(state.outputAnnotation.annotations, annotation),
+      },
+    })),
   getCurrentAnnotations: () => {
     const currentAnnotations = get().outputAnnotation.annotations;
     return currentAnnotations;

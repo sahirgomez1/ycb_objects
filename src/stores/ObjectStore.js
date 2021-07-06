@@ -5,6 +5,7 @@ const useObjectStore = create((set) => ({
     { name: "Tomato Can", gltfFile: "/tomato_can.gltf" },
     { name: "Banana", gltfFile: "/banana.gltf" },
     { name: "Hammer", gltfFile: "/hammer.gltf" },
+    { name: "Screw Driver", gltfFile: "/screwdriver.gltf" },
   ],
   objectSelected: { name: "Banana", gltfFile: "/banana.gltf" },
   objPosition: { x: 0, y: 0.2, z: 0 },
