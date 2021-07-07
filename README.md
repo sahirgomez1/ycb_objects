@@ -1,7 +1,7 @@
-# YCB Object 3d annotation
+# YCB Object 3D annotation
 
-UI to annotate videos using 3d objects, in a camera-object scene.
-TO DO: Multi camera synchronization and model-in-the-loop.
+UI to annotate videos using 3d objects, in a camera-object scene.\
+TO DO (WIP): Multi camera synchronization and model-in-the-loop.
 
 ## Installation and running
 
@@ -16,14 +16,14 @@ In the project directory, install all dependencies with.
 ```
 $ npm install
 ```
-Then run to start the development server.
+To start the development server. Run
 ```
 $ npm start
 ```
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 Currently, there are 4 different objects in the public folder for testing. Add your 3D objects to the public folder, use `.gltf` files. We suggest an [OBJ coverter](https://github.com/CesiumGS/obj2gltf), then optimize
-your glTF assets with `gltf-pipeline`, [more info](https://www.npmjs.com/package/gltf-pipeline).\
+your glTF assets with `gltf-pipeline`, [more info](https://www.npmjs.com/package/gltf-pipeline).
 
 [See demo](https://op3u5.csb.app/) 
 
