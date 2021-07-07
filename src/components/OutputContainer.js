@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import { useAnnotationStore } from '../stores';
+import { useAnnotationStore } from "../stores";
 
 const OutputContainer = () => {
   const inputFile = useRef();
@@ -37,12 +37,13 @@ const OutputContainer = () => {
           <Row className="text-center mt-2 px-2">
             <h5>Review</h5>
             <div className="switch_box box_1">
-              <input 
-                type="checkbox" 
+              <input
+                type="checkbox"
                 className="switch_1"
-                checked={annotationStore.editMode} 
-                onChange={annotationStore.setReviewMode}/>
-            </div>  
+                checked={annotationStore.editMode}
+                onChange={annotationStore.setReviewMode}
+              />
+            </div>
           </Row>
           <hr />
           <Row className="text-center mt-2">
