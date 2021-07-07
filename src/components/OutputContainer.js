@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useAnnotationStore } from "../stores";
 
 const OutputContainer = () => {
@@ -35,7 +35,16 @@ const OutputContainer = () => {
         </Col>
         <Col md="2" className="">
           <Row className="text-center mt-2 px-2">
-            <h5>Review</h5>
+            <OverlayTrigger
+              placement={"top"}
+              overlay={
+                <Tooltip id={"tooltip-top"}>
+                  <h6> Turn off to annotate,<br/> & turn on to review.</h6>
+                </Tooltip>
+              }
+            >
+              <h5>Review</h5>
+            </OverlayTrigger>
             <div className="switch_box box_1">
               <input
                 type="checkbox"
