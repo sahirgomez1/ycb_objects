@@ -2,12 +2,12 @@ import React, { useRef } from "react";
 import { Dropdown, Button, ButtonGroup } from "react-bootstrap";
 import ReactPlayer from "react-player";
 import SceneContainer from "./SceneContainer";
-import { getFixedNumber } from "../utils/MathUtils";
+import { getFixedNumber, frameToS } from "../utils/MathUtils";
 import FormattedTime from "../components/videoPlayer/FormattedTime";
 import { useObjectStore, useCameraStore, useAnnotationStore, useVideoStore } from '../stores';
 
 /**
- * Video player slide component.
+ * Video player slider component.
  *
  * @param {void} onMouseUp Mouse up listener
  * @param {void} onMouseDown Mouse down listener
@@ -45,6 +45,7 @@ const AnnotationView = () => {
     playing,
     played,
     duration,
+    fps,
     playbackRate,
     loop,
     seeking,
@@ -65,15 +66,15 @@ const AnnotationView = () => {
   const objectStore = useObjectStore();
   const { camPosition } = useCameraStore();
 
-  const findAnnotation = (t) => {
+  const findAnnotation = (played) => {
     if (!annotationStore.reviewMode) return
-    const secondsLapsed = t * duration;
+    const framesLapsed = played * duration;
     let currentAnnotations = annotationStore.outputAnnotation.annotations;
     if (currentAnnotations.length <= 0) return;
     const annotation = currentAnnotations.reduce((prev, curr) => {
       let closest =
-        Math.abs(curr.time - secondsLapsed) <
-        Math.abs(prev.time - secondsLapsed)
+        Math.abs(curr.time - framesLapsed) <
+        Math.abs(prev.time - framesLapsed)
           ? curr
           : prev;
       return closest;
@@ -88,8 +89,9 @@ const AnnotationView = () => {
   };
 
   const handleSeekMouseUp = (e) => {
+    let fraction = getFixedNumber(e.target.value, 5);
     handleSeekingtoFalse();
-    player.current.seekTo(getFixedNumber(e.target.value, 5));
+    player.current.seekTo(fraction);
   };
 
   const handleRewind = () => {
@@ -106,14 +108,15 @@ const AnnotationView = () => {
 
   const onProgress = (state) => {
     const { played } = state;
-    if (!seeking) handleProgress(getFixedNumber(played, 5));
-    findAnnotation(played);
+    let fraction = getFixedNumber(played, 5);
+    if (!seeking) handleProgress(fraction);
+    findAnnotation(fraction);
   };
 
   const onSliderChange = (e) => {
-    let t = getFixedNumber(e.target.value, 5);
-    handleSeekChange(t);
-    findAnnotation(t);
+    let fraction = getFixedNumber(e.target.value, 5);
+    handleSeekChange(fraction);
+    findAnnotation(fraction);
   };
 
   return (
@@ -135,7 +138,7 @@ const AnnotationView = () => {
             controls={false}
             loop={loop}
             playbackRate={playbackRate}
-            progressInterval={1000 / 30}
+            progressInterval={1000 / fps}
             onReady={(e) => onVideoReady(e)}
             onStart={() => console.log("onStart")}
             onBuffer={() => console.log("onBuffer")}
@@ -200,9 +203,9 @@ const AnnotationView = () => {
           </div>
           <div className="d-flex align-items-center">
             <div className="player-control__time">
-              <FormattedTime seconds={played * duration} />
+              <FormattedTime seconds={played * frameToS(duration, fps)} />
               {" / "}
-              <FormattedTime seconds={duration} />
+              <FormattedTime seconds={frameToS(duration, fps)} />
             </div>
           </div>
         </div>

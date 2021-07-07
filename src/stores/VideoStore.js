@@ -1,11 +1,13 @@
 import create from 'zustand';
+import { secondsToFrame } from '../utils/MathUtils';
 
 const useVideoStore = create(set => ({
     url: "https://storage.turbo360.co/instagram_clone-vjcpvp/rbgt_banana.mp4",
-    duration: 0,
+    duration: 0, // frames
     id :'react-player',
     played: 0,
     seekedTime: 0,
+    fps: 30,
     playing: false,
     controls: false ,
     muted: true,
@@ -22,7 +24,7 @@ const useVideoStore = create(set => ({
     handleToggleLoop : () => set ( state => ({ loop: !state.loop})),
     handleVideoPlayPause : () => set (state => ({ playing : !state.playing })),
     handleVideoRewind : () => set (state => ({ playing: false, played: 0})),
-    handleVideoDuration : (duration) => set (state => ({ duration : duration })), 
+    handleVideoDuration : (duration) => set (state => ({ duration : secondsToFrame(duration, state.fps) })), 
     handleEnded: () => set (state => ({ playing : state.loop})),
     handleProgress: (played) => set(state => ({ played: played })),
     handleSeekingtoFalse: () => set (state => ({ seeking: false })), 
