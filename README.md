@@ -5,32 +5,24 @@
 To install. First clone the repo using:
 ```
 git clone https://github.com/sahirgomez1/ycb_objects.git
+
 cd ycb_objects_app
 ```
 
-In the project directory, you can run
+In the project directory, run to install all dependencies.
 ```
-npm install
+$ npm install
 ```
-to install all dependencies. Then run.
+Then run to start the development server.
 ```
-npm start
+$ npm start
 ```
-Add your 3D objects to the public folder, use `.gltf` files. We suggest an [OBJ coverter](https://github.com/CesiumGS/obj2gltf), then optimize
-your glTF assets with `gltf-pipeline`, [more info](https://www.npmjs.com/package/gltf-pipeline). 
-
-### `npm start`
-
-Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Currently, there are 4 different objects in the public folder for testing. Add your 3D objects to the public folder, use `.gltf` files. We suggest an [OBJ coverter](https://github.com/CesiumGS/obj2gltf), then optimize
+your glTF assets with `gltf-pipeline`, [more info](https://www.npmjs.com/package/gltf-pipeline). \
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+[See demo](https://op3u5.csb.app/) 
 
 ### `npm run build`
 
@@ -42,15 +34,3 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
