@@ -269,9 +269,11 @@ const ControlsContainer = () => {
         </Tab.Container>
         <hr />
         <h6>
-          Press Shift to rotate object over X,Y. <br/>
-          Press Control to rotate over Z <br />
-          Click and drag object to translate.
+          Press Shift to rotate object over X,Y.<br/>
+          Press Control to rotate over Z.<br />
+          Click object to annotate.<br/>
+          Click and drag object to translate.<br/>
+          Toggle Review to track annotations.
         </h6>
       </div>
       </>
