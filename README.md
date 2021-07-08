@@ -5,11 +5,9 @@ TO DO (WIP): Multi camera synchronization and model-in-the-loop.
 
 ## Installation and running
 
-To install. First clone the repo using:
+To install. First clone the repo.
 ```
-git clone https://github.com/sahirgomez1/ycb_objects.git
-
-cd ycb_objects_app
+cd ycb_objects
 ```
 
 In the project directory, install all dependencies with.
